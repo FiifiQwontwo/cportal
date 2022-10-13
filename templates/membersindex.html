@@ -1,0 +1,8 @@
+{% for mil in mil %}
+    <tr>
+        <td>{{ mil.id }}</td>
+        <td>{{ mil.last_name |lower|capfirst }}</td>
+        <td>{{ mil.first_name |lower|capfirst }}</td>
+        <td>{{ mil.phone_number }}&nbsp;</td>
+    </tr>
+{% endfor %}

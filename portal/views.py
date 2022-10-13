@@ -10,7 +10,7 @@ def index_page(request):
     groupcount = Groups.objects.all().count()
     usercount = DBUser.objects.all().count()
     chapscount = Chapels.objects.all().count()
-    db_usered = DBUser.objects.all().order_by('-id')[:20].select_related('chapel', 'group')
+    db_usered = DBUser.objects.all().order_by('-id')[:30].select_related('chapel', 'group')
 
     context = {
         'memcounts': memcounts,
@@ -21,3 +21,14 @@ def index_page(request):
 
     }
     return render(request, 'index.html', context)
+
+
+def memberindex(request):
+    mil = Members.objects.all().order_by('-id')[:5].select_related('group', 'chapel')
+    # nil = DBUser.objects.filter(group__id = Members.group)
+
+    context = {
+        'mil': mil,
+        # 'nil': nil
+    }
+    return render(request, 'membersindex.html', context)
