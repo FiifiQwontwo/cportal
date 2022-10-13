@@ -32,3 +32,13 @@ def memberindex(request):
         # 'nil': nil
     }
     return render(request, 'membersindex.html', context)
+
+def list_view_member(request):
+    memlist = Members.objects.all().select_related('chapel', 'group')
+    # groud = DBUser.objects.filter(group__id=Members.group)
+
+    context = {
+        'memlist': memlist
+        # 'groud': groud,
+    }
+    return render(request, 'member/list.html', context)

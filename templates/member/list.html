@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC | Members{% endblock %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>PC Members</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+{#                        <div class="card">#}
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>FIRST NAME</th>
+                                            <th>LAST NAME</th>
+                                            <th>PHONE NUMBER</th>
+                                            <th> CHAPEL NAME</th>
+                                            <th> PC GROUP</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for memlist in memlist %}
+                                            <tr>
+                                                <td>{{ memlist.id }}</td>
+                                                <td>{{ memlist.first_name }}</td>
+                                                <td>{{ memlist.last_name }}</td>
+                                                <td>{{ memlist.phone_number }}</td>
+                                                <td>{{ memlist.chapel }}</td>
+                                                <td>{{ memlist.group }}</td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tfoot>
+                                    </table>
+                                    <div class="card-footer clearfix">
+{#                                        <a href="{% url 'ChurchDashboard:add_member_url' %}"#}
+{#                                           class="btn btn-sm btn-info float-left">Add Member</a>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    </div>
+{% endblock %}
