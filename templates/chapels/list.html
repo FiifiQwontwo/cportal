@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}CTAC | PC HEADS{% endblock %}
+{% block title %}CTAC | CHAPELS {% endblock %}
 {% block content %}
-
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>PC Heads</h1>
+                        <h1>Chapels</h1>
                     </div>
                 </div>
             </div>
         </section>
-
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -25,26 +23,28 @@
                                         <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>TITLE</th>
-                                            <th>NAME</th>
-                                            <th> GROUP NAME</th>
-                                             <th> CHAPEL </th>
+                                            <th> CHAPEL</th>
+                                            <th>DATE ADDED</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {%  for db_user in db_user %}
-                                        <tr>
-                                            <td>{{ db_user.id }}</td>
-                                            <td>{{ db_user.title |default_if_none:"" | capfirst }}</td>
-                                            <td> {{ db_user.name }}</td>
-                                            <td>{{ db_user.group }}</td>
-                                            <td>{{ db_user.chapel }}</td>
-                                        </tr>
+                                        {% for chaps in chaps %}
+                                            <tr>
+                                                <td>{{ chaps.id }}</td>
+                                                <td><a href="{#}"
+                                                       class="link-black">{{ chaps.name }}</a></td>
+                                                <td>{{ chaps.created_at| date:"d M, Y"}}</td>
+
+                                            </tr>
                                         {% endfor %}
 
                                         </tfoot>
                                     </table>
                                 </div>
+                                        </div>
+                        <div class="card-footer clearfix">
+{#                <a href="{% url 'portal:add_chapel_url' %}" class="btn btn-sm btn-secondary float-right">New Chapel</a>#}
+              </div>
                             </div>
                         </div>
                     </div>

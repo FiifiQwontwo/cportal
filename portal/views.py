@@ -61,3 +61,11 @@ def db_user_list(request):
         'db_user': db_user
     }
     return render(request, 'DbUser/list.html', context)
+
+
+def chapel_list(request):
+    chaps = Chapels.objects.all()
+    context = {
+        'chaps': chaps
+    }
+    return render(request, 'chapels/list.html', context)
