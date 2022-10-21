@@ -33,6 +33,7 @@ def memberindex(request):
     }
     return render(request, 'membersindex.html', context)
 
+
 def list_view_member(request):
     memlist = Members.objects.all().select_related('chapel', 'group')
     # groud = DBUser.objects.filter(group__id=Members.group)
@@ -42,3 +43,21 @@ def list_view_member(request):
         # 'groud': groud,
     }
     return render(request, 'member/list.html', context)
+
+
+def groups_list(request):
+    gro = Groups.objects.all()
+    # userlist = DBUser.objects.filter(group__id=gro.id)
+    context = {
+        'gro': gro
+        # 'userlist': userlist
+    }
+    return render(request, 'groups/list.html', context)
+
+
+def db_user_list(request):
+    db_user = DBUser.objects.all().order_by('created_at').select_related('group', 'chapel')
+    context = {
+        'db_user': db_user
+    }
+    return render(request, 'DbUser/list.html', context)
