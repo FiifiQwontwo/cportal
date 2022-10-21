@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC | Attendances {% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Attendances Summary</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+
+                                             <th> Group Name </th>
+                                             <th> Service Day </th>
+{#                                             <th>Attendance Date</th>#}
+                                             <th> Total Present </th>
+                                             <th> Attendance Percentage</th>
+                                             <th>Total Absent</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for att_summary in att_summary %}
+                                        <tr>
+                                            <td>{{ att_summary.group.name   }}</td>
+                                            <td>{{ att_summary.weekday }}</td>
+{#                                            <td>{{ att_summary.attendance_date |date:"M d, Y" }}</td>#}
+                                            <td>{{att_summary.total_present}}</td>
+                                            <td>{{ att_summary.present_percentage }} %</td>
+                                            <td>{{att_summary.total_absent}}</td>
+
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    </div>
+{% endblock %}

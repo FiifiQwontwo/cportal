@@ -69,3 +69,20 @@ def chapel_list(request):
         'chaps': chaps
     }
     return render(request, 'chapels/list.html', context)
+
+
+def list_view_attendance(request):
+    read = Attendances.objects.all().order_by('service_date').select_related('member')
+    context = {
+        'read': read
+
+    }
+    return render(request, 'attendance/list.html', context)
+
+
+def attendance_summmaries_list(request):
+    att_summary = AttendanceSummaries.objects.all().order_by('attendance_date').select_related('group')
+    context = {
+        'att_summary': att_summary
+    }
+    return render(request, 'attendance/attendance_summary.html', context)
