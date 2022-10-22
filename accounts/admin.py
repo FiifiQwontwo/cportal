@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.admin import UserAdmin
 from portal.models import *
+from .models import Account
 
 # Register your models here.
 admin.site.site_header = "CTAC PastCare admin"
@@ -9,6 +10,7 @@ admin.site.site_title = "CTAC PastCare admin site"
 admin.site.index_title = "CTAC PastCare admin"
 
 
+@admin.register(Account)
 class AccountAdmin(UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'username', 'phone', 'last_login', 'date_joined')
     list_display_links = ('email', 'username', 'phone')

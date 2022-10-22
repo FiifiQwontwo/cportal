@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC | Attendances {% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Attendances</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
 
-</body>
-</html>
+                                             <th> First Name </th>
+                                             <th> Last Name </th>
+                                             <th>Phone Number</th>
+                                             <th> Group Name </th>
+                                             <th> Chapel</th>
+                                             <th>Service Date</th>
+                                             <th>Present</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {%  for read in read %}
+                                        <tr>
+                                            <td>{{ read.member.first_name  }}</td>
+                                            <td>{{ read.member.last_name }}</td>
+                                            <td>{{ read.member.phone_number }}</td>
+                                            <td>{{ read.member.group }}</td>
+                                            <td>{{ read.member.chapel.name }}</td>
+                                            <td>{{read.service_date |date:"M d, Y" }}</td>
+                                           <td>{{ read.is_present }}</td>
+                                        </tr>
+                                        {% endfor %}
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    </div>
+{% endblock %}

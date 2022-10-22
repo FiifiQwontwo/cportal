@@ -25,7 +25,7 @@
 
                                              <th> Group Name </th>
                                              <th> Service Day </th>
-{#                                             <th>Attendance Date</th>#}
+                                             <th>Attendance Date</th>
                                              <th> Total Present </th>
                                              <th> Attendance Percentage</th>
                                              <th>Total Absent</th>
@@ -37,7 +37,7 @@
                                         <tr>
                                             <td>{{ att_summary.group.name   }}</td>
                                             <td>{{ att_summary.weekday }}</td>
-{#                                            <td>{{ att_summary.attendance_date |date:"M d, Y" }}</td>#}
+                                            <td>{{ att_summary.attendance_date |date:"M d, Y" }}</td>
                                             <td>{{att_summary.total_present}}</td>
                                             <td>{{ att_summary.present_percentage }} %</td>
                                             <td>{{att_summary.total_absent}}</td>

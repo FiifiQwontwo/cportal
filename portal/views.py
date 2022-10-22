@@ -71,6 +71,7 @@ def chapel_list(request):
     return render(request, 'chapels/list.html', context)
 
 
+# when we go to prod remember to change the date on attendance summary (service date)
 def list_view_attendance(request):
     read = Attendances.objects.all().order_by('service_date').select_related('member')
     context = {
