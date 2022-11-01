@@ -57,7 +57,7 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('prod:home_page_url')
+            return redirect('portal:home_page')
         else:
             messages.error(request, "Invalid Credentials")
             return redirect('accounts:login_url')
