@@ -71,6 +71,24 @@ def chapel_list(request):
     return render(request, 'chapels/list.html', context)
 
 
+def chapel_detail(request, id):
+    dbleaders = DBUser.objects.filter(chapel__id=id)
+    dbleaderscount = DBUser.objects.filter(chapel__id=id).count()
+    chapel_members = Members.objects.filter(chapel__id=id)
+    chapel_members_count = Members.objects.filter(chapel__id=id).count()
+    chapdetails = get_object_or_404(Chapels, id=id)
+
+    context ={
+        dbleaders:'dbleaders',
+        dbleaderscount:'dbleaderscount',
+        chapel_members:'chapel_members',
+        chapel_members_count:'chapel_members_count',
+        chapdetails:'chapdetails'
+    }
+    return render(request,'chapels/details.html', context)
+
+
+
 # when we go to prod remember to change the date on attendance summary (service date)
 def list_view_attendance(request):
     read = Attendances.objects.all().order_by('service_date').select_related('member')

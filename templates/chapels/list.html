@@ -31,7 +31,7 @@
                                         {% for chaps in chaps %}
                                             <tr>
                                                 <td>{{ chaps.id }}</td>
-                                                <td><a href="{#}"
+                                                <td><a href="{% url 'portal:details_chapels_urls' chaps.id %}"
                                                        class="link-black">{{ chaps.name }}</a></td>
                                                 <td>{{ chaps.created_at| date:"d M, Y"}}</td>
 
