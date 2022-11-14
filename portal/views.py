@@ -71,22 +71,48 @@ def chapel_list(request):
     return render(request, 'chapels/list.html', context)
 
 
+# def chapel_detail(request, id):
+#     dbleaders = DBUser.objects.filter(chapel__id=id)
+#     dbleaderscount = DBUser.objects.filter(chapel__id=id).count()
+#     chapel_members = Members.objects.filter(chapel__id=id)
+#     chapel_members_count = Members.objects.filter(chapel__id=id).count()
+#     chapdetails = get_object_or_404(Chapels, id=id)
+#
+#     context ={
+#         dbleaders:'dbleaders',
+#         dbleaderscount:'dbleaderscount',
+#         chapel_members:'chapel_members',
+#         chapel_members_count:'chapel_members_count',
+#         chapdetails:'chapdetails'
+#     }
+#     return render(request,'chapels/details.html', context)
+
 def chapel_detail(request, id):
-    dbleaders = DBUser.objects.filter(chapel__id=id)
-    dbleaderscount = DBUser.objects.filter(chapel__id=id).count()
-    chapel_members = Members.objects.filter(chapel__id=id)
-    chapel_members_count = Members.objects.filter(chapel__id=id).count()
-    chapdetails = get_object_or_404(Chapels, id=id)
+    db_users = DBUser.objects.filter(chapel__id=id)
+    dbuser_count = DBUser.objects.filter(chapel__id=id).count()
+    ch_mem_count = Members.objects.filter(chapel__id=id).count()
+    cha_mem = Members.objects.filter(chapel__id=id).order_by(('-id')[:5])
+    membered = Members.objects.filter(group__id=id)
+    if cache.get(id):
+        print('we did it')
+        chapdetails = cache.get(id)
+    else:
+        try:
+            chapdetails = Chapels.objects.get(id=id)
+            cache.set(id, chapdetails)
 
-    context ={
-        dbleaders:'dbleaders',
-        dbleaderscount:'dbleaderscount',
-        chapel_members:'chapel_members',
-        chapel_members_count:'chapel_members_count',
-        chapdetails:'chapdetails'
+        except Chapels.DoesNotExist:
+            return redirect('portal:home_page')
+    context = {
+        'chapdetails': chapdetails,
+        'db_users': db_users,
+        'dbuser_count': dbuser_count,
+        'ch_mem_count': ch_mem_count,
+        'cha_mem': cha_mem,
+        'membered': membered
+
     }
-    return render(request,'chapels/details.html', context)
-
+    return render(request, 'chapels/details.html', context)
 
 
 # when we go to prod remember to change the date on attendance summary (service date)

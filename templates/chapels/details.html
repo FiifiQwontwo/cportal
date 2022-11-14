@@ -1,3 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC | {{ chapdetails.name }}{% endblock %}
 {% block content %}
-{{ dbleaderscount }}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1> {{ chapdetails.name }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{% url 'portal:home_page' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{% url 'portal:list_chapel_url' %}">Chapels</a></li>
+                            <li class="breadcrumb-item active">{{ chapdetails.name }}</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-center text-muted">{{ chapdetails.name }} &nbsp; Total Group Heads</span>
+                                    <span class="info-box-number text-center text-muted mb-0">{{ dbuser_count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="info-box bg-light">
+                                <div class="info-box-content">
+                                    <span class="info-box-text text-center text-muted">{{ chapdetails.name }} Total Members </span>
+                                    <span class="info-box-number text-center text-muted mb-0">{{ ch_mem_count }} </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Last name</th>
+                                            <th> Other name</th>
+                                            <th>First name</th>
+                                            <th> Group name</th>
+                                            <th>Phone number</th>
+{#                                            <th>chapel</th>#}
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for cha_mem in cha_mem %}
+                                            <tr>
+                                                <td>{{ cha_mem.last_name }}</td>
+                                                <td> {{ cha_mem.other_name|default_if_none:"" }}</td>
+                                                <td>{{ cha_mem.first_name }}</td>
+                                                 <td>{{ cha_mem.group.name }}</td>
+                                                  <td>{{ cha_mem.phone_number }}</td>
+{#                                                  <td>{{ cha_mem.chapel }}</td>#}
+
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tfoot>
+                                    </table>
+                                &nbsp;
+                                    <div class="card">
+                                        <div class="card-header border-transparent">
+                                            <h3 class="card-title">Members of {{ chapdetails.name }}</h3>
+                                            <div class="card-body p-0">
+                                                <div class="table-responsive">
+                                                    <table class="table m-0">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th> Group</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                       {% for db_users in db_users %}
+                                            <tr>
+                                                <td>{{ db_users.id }}</td>
+                                                <td> {{ db_users.name }}</td>
+                                                <td>{{ db_users.email }}</td>
+                                               <td>{{ db_users.group.name }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- /.table-responsive -->
+                                            </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer clearfix">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place
+                                                    New Order</a>
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-sm btn-secondary float-right">View All Orders</a>
+                                            </div>
+                                            <!-- /.card-footer -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
 {% endblock %}
