@@ -105,21 +105,21 @@ def chapel_list(request):
     return render(request, 'chapels/list.html', context)
 
 
-# def chapel_detail(request, id):
-#     dbleaders = DBUser.objects.filter(chapel__id=id)
-#     dbleaderscount = DBUser.objects.filter(chapel__id=id).count()
-#     chapel_members = Members.objects.filter(chapel__id=id)
-#     chapel_members_count = Members.objects.filter(chapel__id=id).count()
-#     chapdetails = get_object_or_404(Chapels, id=id)
-#
-#     context ={
-#         dbleaders:'dbleaders',
-#         dbleaderscount:'dbleaderscount',
-#         chapel_members:'chapel_members',
-#         chapel_members_count:'chapel_members_count',
-#         chapdetails:'chapdetails'
-#     }
-#     return render(request,'chapels/details.html', context)
+def members_details(request, pk):
+    if cache.get(pk):
+        print('cache working')
+        mem_det = cache.get(pk)
+    else:
+        try:
+            mem_det = Members.objects.get(pk=pk)
+            cache.set(pk, mem_det)
+            print('DB DATA')
+        except Members.DoesNotExist:
+            return redirect('portal:home_page')
+    context = {
+        'mem_det': mem_det
+    }
+    return render(request, 'member/details.html', context)
 
 def chapel_detail(request, id):
     db_users = DBUser.objects.filter(chapel__id=id)

@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC |{{ mem_det.last_name }} {{ mem_det.other_name|default_if_none:"" }}{{ mem_det.first_name }}{% endblock %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1> {{ mem_det.first_name }}&nbsp;{{ mem_det.other_name|default_if_none:"" }}&nbsp;{{ mem_det.last_name }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{% url 'portal:home_page' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'portal:list_member_url' %}">Members</a></li>
+                            <li class="breadcrumb-item active">{{ mem_det.first_name }}&nbsp;{{ mem_det.other_name|default_if_none:"" }}&nbsp;{{ mem_det.last_name }}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="{% static 'dist/img/user4-128x128.jpg' %}"
+                       alt="User profile picture">
+                </div>
+
+                <h4 class="profile-username text-center">{{ mem_det.first_name}} {{ mem_det.other_name |default_if_none:""  }} {{ mem_det.last_name }}</h4>
+
+                  <a href="{% url 'portal:details_group_urls' mem_det.group.id%}" class="btn btn-default btn-block btn-flat">{{ mem_det.group }}</a>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <b>Title</b> <p class="float-right" class="text-black">{{ mem_det.title|capfirst |default_if_none:""}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Gender</b> <p class="float-right" class="text-black">{{ mem_det.sex |capfirst|default_if_none:""}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Date of Birth</b> <p class="float-right" class="text-black">{{ mem_det.dob|date:"d M, Y"  }}</p>
+                  </li>
+                </ul>
+
+                <a href="{% url 'portal:details_chapels_urls' mem_det.chapel.id%}" class="btn btn-primary btn-block"><b>{{ mem_det.chapel }}</b></a>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+
+
+              <div class="card-header">
+                <h3 class="card-title">Residents & Contact</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <i class="fas fa-lg fa-building"></i> GPS Address
+
+                <p class="text-black">
+                  {{ mem_det.gps_address |default_if_none:""}}
+                </p>
+
+                <hr>
+
+                <i class="fas fa-map-marker-alt mr-1"></i> House Adress
+
+                &nbsp;<p class="text-black"> &nbsp;{{ mem_det.area_of_residence |default_if_none:""}}</p>
+
+                <hr>
+
+              &nbsp; <i class="fas fa-lg fa-phone"></i> &nbsp;Phone
+
+                <p class="text-black">
+                  <span class="tag tag-danger">{{ mem_det.phone_number}}</span><br>
+                  <span class="tag tag-success">{{ mem_det.whatsapp_number|default_if_none:""}}</span>
+                  <span class="tag tag-info">{{ mem_det.other_phone_number|default_if_none:"" }}</span><br>
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+    </section>
+      </div>
+    </section>
+    </div>
+
+
+    <div class="modal fade" id="modal-default">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Default Modal</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <section class="content">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-6">
+            
+                        <!-- Profile Image -->
+                        <div class="card card-primary card-outline">
+                          <div class="card-body box-profile">
+                            <div class="text-center">
+                              <img class="profile-user-img img-fluid img-circle"
+                                   src="{% static 'dist/img/user4-128x128.jpg' %}"
+                                   alt="User profile picture">
+                            </div>
+            
+                            <h4 class="profile-username text-center">{{ mem_det.first_name}} {{ mem_det.other_name |default_if_none:""  }} {{ mem_det.last_name }}</h4>
+            
+                              <a href="{% url 'portal:details_group_urls' mem_det.group.id%}" class="btn btn-default btn-block btn-flat">{{ mem_det.group }}</a>
+            
+                            <ul class="list-group list-group-unbordered mb-3">
+                              <li class="list-group-item">
+                                <b>Title</b> <p class="float-right" class="text-black">{{ mem_det.title|capfirst |default_if_none:""}}</p>
+                              </li>
+
+                              <li class="list-group-item">
+                                <b>Gender</b> <p class="float-right" class="text-black">{{ mem_det.sex |capfirst|default_if_none:""}}</p>
+                              </li>
+                              <li class="list-group-item">
+                                <b>Date of Birth</b> <p class="float-right" class="text-black">{{ mem_det.dob|date:"d M, Y"  }}</p>
+                              </li>
+                            </ul>
+            
+                            <a href="{% url 'portal:details_chapels_urls' mem_det.chapel.id%}" class="btn btn-primary btn-block"><b>{{ mem_det.chapel }}</b></a>
+                          </div>
+            
+                        </div>
+            
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card">
+            
+            
+                          <div class="card-header">
+                            <h3 class="card-title">Residents & Contact</h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body">
+                            <i class="fas fa-lg fa-building"></i> GPS Address
+            
+                            <p class="text-black">
+                              {{ mem_det.gps_address |default_if_none:""}}
+                            </p>
+            
+                            <hr>
+            
+                            <i class="fas fa-map-marker-alt mr-1"></i> House Address
+            
+                            &nbsp;<p class="text-black"> &nbsp;{{ mem_det.area_of_residence |default_if_none:""}}</p>
+            
+                            <hr>
+            
+                          &nbsp; <i class="fas fa-lg fa-phone"></i> &nbsp;Phone
+            
+                            <p class="text-black">
+                              <span class="tag tag-danger">{{ mem_det.phone_number}}</span><br>
+                              <span class="tag tag-success">{{ mem_det.whatsapp_number|default_if_none:""}}</span>
+                              <span class="tag tag-info">{{ mem_det.other_phone_number|default_if_none:"" }}</span><br>
+                            </p>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                </section>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+{% endblock %}
