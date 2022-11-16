@@ -39,7 +39,7 @@
                                     {% for gro in gro %}
                                         <tr>
                                             <td>{{ gro.id }}</td>
-                                            <td><a href="#"
+                                            <td><a href="{% url 'portal:details_group_urls' gro.id %}"
                                                    class="link-black">{{ gro.name }}</a></td>
                                            <td>{{ gro.created_at| date:"d M, Y"}}</td>
 
@@ -50,7 +50,7 @@
                                     </tfoot>
                                 </table>
                                 <div class="card-footer clearfix">
-{#                                    <a href="{% url 'portal:add_group_url' %}"#}
+                                    <a href="{% url 'portal:add_group_url' %}"
                                        class="btn btn-sm btn-info float-left">New Care Group</a>
 
                                 </div>

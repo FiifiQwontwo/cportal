@@ -55,6 +55,40 @@ def groups_list(request):
     return render(request, 'groups/list.html', context)
 
 
+def groups_details(request, pk):
+    userlist = DBUser.objects.filter(group__id=pk)
+    gro_membs_count = Members.objects.filter(group__id=pk).count()
+    gro_membs = Members.objects.filter(group__id=pk)
+    if cache.get(pk):
+        print('cache')
+        grodetails = cache.get(pk)
+    else:
+        try:
+            grodetails = Groups.objects.get(pk=pk)
+            cache.set(pk, grodetails)
+        except Groups.DoesNotExist:
+            return redirect('portal:home_page')
+    context = {
+        'grodetails': grodetails,
+        'userlist': userlist,
+        'gro_membs_count': gro_membs_count,
+        'gro_membs': gro_membs
+
+    }
+    return render(request, 'groups/details.html', context)
+
+def create_view_group(request):
+    context = {}
+    groupcreate = CreateGroupForm(request.POST or None)
+    if groupcreate.is_valid():
+        groupcreate.save()
+        return redirect('portal:list_group_url')
+
+    context['groupcreate'] = groupcreate
+    return render(request, "groups/create.html", context)
+
+
+
 def db_user_list(request):
     db_user = DBUser.objects.all().order_by('created_at').select_related('group', 'chapel')
     context = {
@@ -113,6 +147,18 @@ def chapel_detail(request, id):
 
     }
     return render(request, 'chapels/details.html', context)
+
+
+def create_chapel(request):
+    context = {
+
+    }
+    chapel_create = CreateChapelForm(request.POST or None)
+    if chapel_create.is_valid():
+        chapel_create.save()
+        return redirect('portal:list_chapel_url')
+    context['chapel_create'] = chapel_create
+    return render(request, 'chapels/add.html', context)
 
 
 # when we go to prod remember to change the date on attendance summary (service date)

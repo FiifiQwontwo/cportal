@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC | {{ grodetails.name }}{% endblock %}
+{% block content %}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1> {{ grodetails.name }}</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{% url 'portal:home_page' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'portal:list_group_url' %}">Groups</a></li>
+                            <li class="breadcrumb-item active">{{ grodetails.name }}</li>
+                        </ol>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                        <div class="row">
+                            <div class="col-12 col-sm-4">
+                                <div class="info-box bg-light">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-center text-muted">{{grodetails.name }} &nbsp; Total Members</span>
+                                        <span class="info-box-number text-center text-muted mb-0">{{ gro_membs_count }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-4">
+                                <div class="info-box bg-light">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-center text-muted">{{ grodetails.name }} &nbsp; Leader </span>
+                                        {% for userlist in userlist %}
+                                        <span class="info-box-number text-center text-muted mb-0">{{ userlist.name }} </span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th> FIRST NAME</th>
+                                            <th>OTHER NAME</th>
+                                            <th>LAST NAME</th>
+                                            <th>PHONE NUMBER</th>
+                                            <th>CHAPEL</th>
+                                            <th>PC HEAD</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {%  for gro_membs in gro_membs %}
+                                        <tr>
+                                            <td>{{ gro_membs.id }}</td>
+                                             <td>{{ gro_membs.first_name }}</td>
+                                             <td>{{ gro_membs.other_name |default_if_none:"" }}</td>
+                                              <td>{{ gro_membs.last_name }}</td>
+                                            <td>{{ gro_membs.phone_number }}</td>
+                                            <td>{{ gro_membs.chapel }}</td>
+                                           <td>{% for userlist in userlist %}{{ userlist.name }}{% endfor %}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tfoot>
+                                    </table>
+{#                                 <div class="card-footer clearfix">#}
+{#                                    <a href="{% url 'portal:delete_group' grodetails.id %}"#}
+{#                                       class="btn btn-sm btn-info float-left">Delete Group</a>#}
+{#                                </div>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}
