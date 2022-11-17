@@ -3,8 +3,9 @@ from portal.models import AttendanceSummaries, Attendances, Members, Groups, Cha
 from django.core.cache import cache
 from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm
 import json
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='accounts:login_url')
 def index_page(request):
     memcounts = Members.objects.all().count()
     groupcount = Groups.objects.all().count()
@@ -46,7 +47,7 @@ def list_view_member(request):
 
 
 def groups_list(request):
-    gro = Groups.objects.all()
+    gro = Groups.objects.all().order_by('created_at')
     # userlist = DBUser.objects.filter(group__id=gro.id)
     context = {
         'gro': gro

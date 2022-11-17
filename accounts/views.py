@@ -9,9 +9,11 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required(login_url = 'accounts:login_url')
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

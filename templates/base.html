@@ -128,7 +128,7 @@ a:hover {
                         </a>
                     </li>
                      <li class="nav-item">
-{#                        <a href="{% url 'accounts:logout' %}" class="nav-link">#}
+                        <a href="{% url 'accounts:sign_out_url' %}" class="nav-link">
                             <i class="fas fa-door-closed"></i> &nbsp;
                             <p>
                                 Logout
@@ -136,7 +136,7 @@ a:hover {
                         </a>
                     </li>
                      <li class="nav-item">
-{#                        <a href="{% url 'accounts:sign_in' %}" class="nav-link">#}
+                        <a href="{% url 'accounts:login_url' %}" class="nav-link">
                             <i class="fas fa-user-plus"></i>&nbsp;
                             <p>
                                 New User
