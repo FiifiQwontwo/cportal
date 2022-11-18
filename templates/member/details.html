@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}CTAC |{{ mem_det.last_name }} {{ mem_det.other_name|default_if_none:"" }}{{ mem_det.first_name }}{% endblock %}
+{% block title %}CTAC | {{ mem_det.last_name }} {{ mem_det.other_name|default_if_none:"" }}{{ mem_det.first_name }}{% endblock %}
 {% block content %}
 
     <div class="content-wrapper">
@@ -121,7 +121,7 @@
                                    src="{% static 'dist/img/user4-128x128.jpg' %}"
                                    alt="User profile picture">
                             </div>
-            
+
                             <h4 class="profile-username text-center">{{ mem_det.first_name}} {{ mem_det.other_name |default_if_none:""  }} {{ mem_det.last_name }}</h4>
             
                               <a href="{% url 'portal:details_group_urls' mem_det.group.id%}" class="btn btn-default btn-block btn-flat">{{ mem_det.group }}</a>
