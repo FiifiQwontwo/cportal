@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}CTAC | New Member{% endblock %}
+{% block content %}
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">ADD Member </h3>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <form method="POST" action="">
+                  {% csrf_token %}
+                    <div class="form-group">
+                    <label>Title </label>
+                    <input
+                      type='text'
+                      name='title'
+                      class="form-control"
+                      placeholder="Mr. Mrs. Rev. ">
+                  </div>
+                  <div class="form-group">
+                    <label>Last Name </label>
+                    <input
+                      type='text'
+                      name='last_name'
+                      class="form-control"
+                      placeholder="Enter last name">
+                  </div>
+                    <div class="form-group">
+                    <label>First Name </label>
+                    <input
+                      type='text'
+                      name='first_name'
+                      class="form-control"
+                      placeholder="Enter first name">
+                  </div>
+                    <div class="form-group">
+                    <label>Other Name </label>
+                    <input
+                      type='text'
+                      name='other_name'
+                      class="form-control"
+                      placeholder="Enter Other name">
+                  </div>
+                    <div class="form-group">
+                    <label>Gender </label>
+                    <input
+                      type='text'
+                      name='sex'
+                      class="form-control"
+                      placeholder="Male or Female">
+                  </div>
+                    <div class="form-group">
+                    <label>Phone Number </label>
+                    <input
+                      type='tel'
+                      name='phone_number'
+                      class="form-control"
+                      placeholder="0547232768">
+                  </div>
+                    <div class="form-group">
+                    <label>Whatsapp Phone </label>
+                    <input
+                      type='tel'
+                      name='whatsapp_number'
+                      class="form-control"
+                      placeholder="0547232768">
+                  </div>
+                    <div class="form-group">
+                    <label>Other Phone </label>
+                    <input
+                      type='tel'
+                      name='other_phone_number'
+                      class="form-control"
+                      placeholder="0547232768">
+                  </div>
+                     <div class="form-group">
+                    <label>Area of Residence </label>
+                    <input
+                      type='text'
+                      name='area_of_residence'
+                      class="form-control"
+                      placeholder="Nungua">
+                  </div>
+                     <div class="form-group">
+                    <label>GPS Address </label>
+                    <input
+                      type='tel'
+                      name='gps_address'
+                      class="form-control"
+                      placeholder="GA-000-0000">
+                  </div>
+                     <div class="form-group">
+                    <label>DOB </label>
+                    <input
+                      type='date'
+                      name='dob'
+                      class="form-control"
+                      placeholder="21/02/2000">
+                  </div>
+                    <div class="form-group">
+                         <label>Select PC Group</label><br>
+                    {{ mem_create.group }}<br>
+                        &nbsp;<br>
+                         <label>Select Chapel</label><br>
+                    {{ mem_create.chapel }}
+                    </div>
+
+
+
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock %}
+

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}CTAC | {{ mem_det.last_name }} {{ mem_det.other_name|default_if_none:"" }}{{ mem_det.first_name }}{% endblock %}
+{% block title %}CTAC | {{ mem_det.last_name|capfirst }} {{ mem_det.other_name|default_if_none:"" }}{{ mem_det.first_name|capfirst }}{% endblock %}
 {% block content %}
 
     <div class="content-wrapper">
@@ -8,13 +8,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1> {{ mem_det.first_name }}&nbsp;{{ mem_det.other_name|default_if_none:"" }}&nbsp;{{ mem_det.last_name }}</h1>
+                        <h1> {{ mem_det.first_name|capfirst }}&nbsp;{{ mem_det.other_name|default_if_none:"" }}&nbsp;{{ mem_det.last_name|capfirst }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{% url 'portal:home_page' %}">Home</a></li>
                             <li class="breadcrumb-item"><a href="{% url 'portal:list_member_url' %}">Members</a></li>
-                            <li class="breadcrumb-item active">{{ mem_det.first_name }}&nbsp;{{ mem_det.other_name|default_if_none:"" }}&nbsp;{{ mem_det.last_name }}</li>
+                            <li class="breadcrumb-item active">{{ mem_det.first_name|capfirst  }}&nbsp;{{ mem_det.other_name|default_if_none:"" }}&nbsp;{{ mem_det.last_name|capfirst }}</li>
                         </ol>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                        alt="User profile picture">
                 </div>
 
-                <h4 class="profile-username text-center">{{ mem_det.first_name}} {{ mem_det.other_name |default_if_none:""  }} {{ mem_det.last_name }}</h4>
+                <h4 class="profile-username text-center">{{ mem_det.first_name|capfirst}} {{ mem_det.other_name |default_if_none:"" |capfirst  }} {{ mem_det.last_name|capfirst }}</h4>
 
                   <a href="{% url 'portal:details_group_urls' mem_det.group.id%}" class="btn btn-default btn-block btn-flat">{{ mem_det.group }}</a>
 
@@ -47,7 +47,7 @@
                     <b>Gender</b> <p class="float-right" class="text-black">{{ mem_det.sex |capfirst|default_if_none:""}}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Date of Birth</b> <p class="float-right" class="text-black">{{ mem_det.dob|date:"d M, Y"  }}</p>
+                    <b>Date of Birth</b> <p class="float-right" class="text-black">{{ mem_det.dob  }}</p>
                   </li>
                 </ul>
 
@@ -69,14 +69,14 @@
                 <i class="fas fa-lg fa-building"></i> GPS Address
 
                 <p class="text-black">
-                  {{ mem_det.gps_address |default_if_none:""}}
+                  {{ mem_det.gps_address |default_if_none:""|capfirst}}
                 </p>
 
                 <hr>
 
-                <i class="fas fa-map-marker-alt mr-1"></i> House Adress
+                <i class="fas fa-map-marker-alt mr-1"></i> House Address
 
-                &nbsp;<p class="text-black"> &nbsp;{{ mem_det.area_of_residence |default_if_none:""}}</p>
+                &nbsp;<p class="text-black"> &nbsp;{{ mem_det.area_of_residence |default_if_none:""|capfirst}}</p>
 
                 <hr>
 
@@ -122,7 +122,7 @@
                                    alt="User profile picture">
                             </div>
 
-                            <h4 class="profile-username text-center">{{ mem_det.first_name}} {{ mem_det.other_name |default_if_none:""  }} {{ mem_det.last_name }}</h4>
+                            <h4 class="profile-username text-center">{{ mem_det.first_name|capfirst}} {{ mem_det.other_name|capfirst |default_if_none:""  }} {{ mem_det.last_name|capfirst }}</h4>
             
                               <a href="{% url 'portal:details_group_urls' mem_det.group.id%}" class="btn btn-default btn-block btn-flat">{{ mem_det.group }}</a>
             

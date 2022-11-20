@@ -1,4 +1,6 @@
 from django.db import models
+from accounts.models import Account
+from django.conf import settings
 
 
 class Chapels(models.Model):
@@ -6,6 +8,7 @@ class Chapels(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     class Meta:
         managed = False
@@ -36,6 +39,7 @@ class Groups(models.Model):
     name = models.CharField(unique=True, max_length=255)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     class Meta:
         managed = False
@@ -64,6 +68,7 @@ class Members(models.Model):
     gps_address = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     class Meta:
         managed = False
@@ -133,6 +138,7 @@ class DBUser(models.Model):
     remember_token = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     class Meta:
         managed = False

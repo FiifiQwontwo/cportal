@@ -24,6 +24,7 @@ def index_page(request):
     return render(request, 'index.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def memberindex(request):
     mil = Members.objects.all().order_by('-id')[:5].select_related('group', 'chapel')
     # nil = DBUser.objects.filter(group__id = Members.group)
@@ -35,6 +36,7 @@ def memberindex(request):
     return render(request, 'membersindex.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def list_view_member(request):
     memlist = Members.objects.all().select_related('chapel', 'group')
     # groud = DBUser.objects.filter(group__id=Members.group)
@@ -46,6 +48,7 @@ def list_view_member(request):
     return render(request, 'member/list.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def groups_list(request):
     gro = Groups.objects.all().order_by('created_at')
     # userlist = DBUser.objects.filter(group__id=gro.id)
@@ -56,6 +59,7 @@ def groups_list(request):
     return render(request, 'groups/list.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def groups_details(request, pk):
     userlist = DBUser.objects.filter(group__id=pk)
     gro_membs_count = Members.objects.filter(group__id=pk).count()
@@ -78,6 +82,8 @@ def groups_details(request, pk):
     }
     return render(request, 'groups/details.html', context)
 
+
+@login_required(login_url='accounts:login_url')
 def create_view_group(request):
     context = {}
     groupcreate = CreateGroupForm(request.POST or None)
@@ -90,6 +96,7 @@ def create_view_group(request):
 
 
 
+@login_required(login_url='accounts:login_url')
 def db_user_list(request):
     db_user = DBUser.objects.all().order_by('created_at').select_related('group', 'chapel')
     context = {
@@ -98,6 +105,7 @@ def db_user_list(request):
     return render(request, 'DbUser/list.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def chapel_list(request):
     chaps = Chapels.objects.all()
     context = {
@@ -106,6 +114,7 @@ def chapel_list(request):
     return render(request, 'chapels/list.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def members_details(request, pk):
     if cache.get(pk):
         print('cache working')
@@ -122,6 +131,8 @@ def members_details(request, pk):
     }
     return render(request, 'member/details.html', context)
 
+
+@login_required(login_url='accounts:login_url')
 def chapel_detail(request, id):
     db_users = DBUser.objects.filter(chapel__id=id)
     dbuser_count = DBUser.objects.filter(chapel__id=id).count()
@@ -150,6 +161,7 @@ def chapel_detail(request, id):
     return render(request, 'chapels/details.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def create_chapel(request):
     context = {
 
@@ -162,6 +174,7 @@ def create_chapel(request):
     return render(request, 'chapels/add.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 # when we go to prod remember to change the date on attendance summary (service date)
 def list_view_attendance(request):
     read = Attendances.objects.all().order_by('service_date').select_related('member')
@@ -172,9 +185,24 @@ def list_view_attendance(request):
     return render(request, 'attendance/list.html', context)
 
 
+@login_required(login_url='accounts:login_url')
 def attendance_summmaries_list(request):
     att_summary = AttendanceSummaries.objects.all().order_by('attendance_date').select_related('group')
     context = {
         'att_summary': att_summary
     }
     return render(request, 'attendance/attendance_summary.html', context)
+
+
+# member creation
+@login_required(login_url='accounts:login_user')
+def create_members(request):
+    context = {}
+    mem_create = CreateMemberForm(request.POST or None)
+    if mem_create.is_valid():
+        mem_create.save()
+        return redirect('portal:list_member_url')
+
+    context['mem_create'] = mem_create
+    return render(request, "member/create.html", context)
+
