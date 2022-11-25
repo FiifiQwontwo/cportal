@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from portal.models import AttendanceSummaries, Attendances, Members, Groups, Chapels, DBUser
 from django.core.cache import cache
-from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm
+from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm,CreatePcUserForm
 import json
 from django.contrib.auth.decorators import login_required
 
@@ -204,5 +204,17 @@ def create_members(request):
         return redirect('portal:list_member_url')
 
     context['mem_create'] = mem_create
+    return render(request, "member/create.html", context)
+
+
+@login_required(login_url='accounts:login_user')
+def create_pcheads(request):
+    context = {}
+    dbuser_create = CreatePcUserForm(request.POST or None)
+    if dbuser_create.is_valid():
+        dbuser_create.save()
+        return redirect('portal:list_member_url')
+
+    context['dbuser_create'] = dbuser_create
     return render(request, "member/create.html", context)
 
