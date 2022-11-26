@@ -44,88 +44,32 @@
                       placeholder="Enter  name">
                   </div>
                     <div class="form-group">
-                    <label>First Name </label>
+                    <label>Email </label>
                     <input
-                      type='text'
-                      name='first_name'
+                      type='email'
+                      name='email'
                       class="form-control"
-                      placeholder="Enter first name">
+                      placeholder="Enter email address">
                   </div>
-                    <div class="form-group">
-                    <label>Other Name </label>
-                    <input
-                      type='text'
-                      name='other_name'
-                      class="form-control"
-                      placeholder="Enter Other name">
-                  </div>
-                    <div class="form-group">
-                    <label>Gender </label>
-                    <input
-                      type='text'
-                      name='sex'
-                      class="form-control"
-                      placeholder="Male or Female">
-                  </div>
-                    <div class="form-group">
-                    <label>Phone Number </label>
-                    <input
-                      type='tel'
-                      name='phone_number'
-                      class="form-control"
-                      placeholder="0547232768">
-                  </div>
-                    <div class="form-group">
-                    <label>Whatsapp Phone </label>
-                    <input
-                      type='tel'
-                      name='whatsapp_number'
-                      class="form-control"
-                      placeholder="0547232768">
-                  </div>
-                    <div class="form-group">
-                    <label>Other Phone </label>
-                    <input
-                      type='tel'
-                      name='other_phone_number'
-                      class="form-control"
-                      placeholder="0547232768">
-                  </div>
-                     <div class="form-group">
-                    <label>Area of Residence </label>
-                    <input
-                      type='text'
-                      name='area_of_residence'
-                      class="form-control"
-                      placeholder="Nungua">
-                  </div>
-                     <div class="form-group">
-                    <label>GPS Address </label>
-                    <input
-                      type='tel'
-                      name='gps_address'
-                      class="form-control"
-                      placeholder="GA-000-0000">
-                  </div>
-                     <div class="form-group">
-                    <label>DOB </label>
-                    <input
-                      type='date'
-                      name='dob'
-                      class="form-control"
-                      placeholder="21/02/2000">
-                  </div>
+
                     <div class="form-group">
                          <label>Select PC Group</label><br>
-                    {{ mem_create.group }}<br>
+                    {{ dbuser_create.group }}<br>
                         &nbsp;<br>
                          <label>Select Chapel</label><br>
-                    {{ mem_create.chapel }}
+                    {{ dbuser_create.chapel }}
                     </div>
-
-
+                    <div class="form-group">
+                    <label>Password </label>
+                    <input
+                      type='password'
+                      name='password'
+                      class="form-control"
+                      placeholder="Should be 8 character and more">
+                  </div>
 
                   <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-primary">Clear</button>
                 </form>
               </div>
             </div>

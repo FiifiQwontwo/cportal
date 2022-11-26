@@ -33,7 +33,7 @@
                                                 <td>{{ chaps.id }}</td>
                                                 <td><a href="{% url 'portal:details_chapels_urls' chaps.id %}"
                                                        class="link-black">{{ chaps.name }}</a></td>
-                                                <td>{{ chaps.created_at| date:"d M, Y"}}</td>
+                                                <td>{{ chaps.created_at| date:"d M, Y" }}</td>
 
                                             </tr>
                                         {% endfor %}
@@ -41,16 +41,17 @@
                                         </tfoot>
                                     </table>
                                 </div>
-                                        </div>
-                        <div class="card-footer clearfix">
-                <a href="{% url 'portal:add_chapel_url' %}" class="btn btn-sm btn-secondary float-right">New Chapel</a>
-              </div>
+                            </div>
+                            <div class="card-footer clearfix">
+                                <a href="{% url 'portal:add_chapel_url' %}"
+                                   class="btn btn-sm btn-secondary float-right">New Chapel</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+    </div>
+    </section>
     </div>
 
     </div>

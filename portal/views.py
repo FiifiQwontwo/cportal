@@ -213,8 +213,8 @@ def create_pcheads(request):
     dbuser_create = CreatePcUserForm(request.POST or None)
     if dbuser_create.is_valid():
         dbuser_create.save()
-        return redirect('portal:list_member_url')
+        return redirect('portal:list_grouplead_url')
 
     context['dbuser_create'] = dbuser_create
-    return render(request, "member/create.html", context)
+    return render(request, "DBUSer/create.html", context)
 

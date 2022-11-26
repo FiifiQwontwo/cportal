@@ -28,30 +28,36 @@
                                             <th>TITLE</th>
                                             <th>NAME</th>
                                             <th> GROUP NAME</th>
-                                             <th> CHAPEL </th>
+                                            <th> CHAPEL</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {%  for db_user in db_user %}
-                                        <tr>
-                                            <td>{{ db_user.id }}</td>
-                                            <td>{{ db_user.title |default_if_none:"" | capfirst }}</td>
-                                            <td> {{ db_user.name }}</td>
-                                            <td>{{ db_user.group }}</td>
-                                            <td>{{ db_user.chapel }}</td>
-                                        </tr>
+                                        {% for db_user in db_user %}
+                                            <tr>
+                                                <td>{{ db_user.id }}</td>
+                                                <td>{{ db_user.title |default_if_none:"" | capfirst }}</td>
+                                                <td> {{ db_user.name }}</td>
+                                                <td>{{ db_user.group }}</td>
+                                                <td>{{ db_user.chapel }}</td>
+                                            </tr>
                                         {% endfor %}
 
                                         </tfoot>
                                     </table>
                                 </div>
                             </div>
+                        <div class="card-footer clearfix">
+                    <a href="{% url 'portal:add_dbuser_url' %}"
+                       class="btn btn-sm btn-info float-left">New Group Leader </a>
+
+                </div>
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </section>
-    </div>
 
     </div>
 {% endblock %}
