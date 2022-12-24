@@ -12,9 +12,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
-
 # Create your views here.
-@login_required(login_url = 'accounts:login_url')
+@login_required(login_url='accounts:login_url')
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -68,14 +67,14 @@ def login(request):
     return render(request, 'accounts/login.html')
 
 
-@login_required(login_url = 'accounts:login_url')
+@login_required(login_url='accounts:login_url')
 def logout(request):
     auth.logout(request)
     messages.success(request, "You're logged out")
     return redirect('accounts:login_url')
 
 
-@login_required(login_url = 'accounts:login_url')
+@login_required(login_url='accounts:login_url')
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -93,10 +92,9 @@ def activate(request, uidb64, token):
     # return HttpResponse('ok')
 
 
-
-
-
-
+#
+#
+#
 def forgetpassword(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -117,7 +115,7 @@ def forgetpassword(request):
             send_email.send()
 
             messages.success(request, "password reset email has been sent to your mail")
-            return redirect('accounts:sign_in')
+            return redirect('accounts:login_url')
 
         else:
             messages.error(request, 'Accounts Doesnot Exist')
@@ -126,7 +124,6 @@ def forgetpassword(request):
     return render(request, 'accounts/forgetpasswords.html')
 
 
-# @login_required(login_url='accounts:sign_in')
 def resetpasswordValiate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -141,7 +138,7 @@ def resetpasswordValiate(request, uidb64, token):
 
     else:
         messages.error(request, 'This link is expired')
-        return redirect('accounts:sign_in')
+        return redirect('accounts:login_url')
 
 
 def resetpassword(request):
@@ -155,57 +152,57 @@ def resetpassword(request):
             user.set_password(password)
             user.save()
             messages.success(request, 'Password Reset Was Successful')
-            return redirect('accounts:sign_in')
+            return redirect('accounts:login_url')
         else:
             messages.error(request, "passwords dont match")
             return redirect('accounts:resetpassword_url')
     else:
         return render(request, 'accounts/passreset.html')
 
-
-# using instance to get the user of the profile
-@login_required(login_url='accounts:sign_in')
-def edit_pro(request):
-    userprofile = get_object_or_404(UserProfile, user=request.user)
-    if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile = UserProfileForm(request.POST, request.FILES, instance=userprofile)
-        if user_form.is_valid() & profile.is_valid():
-            user_form.save()
-            profile.save()
-            messages.success(request, 'Your just updated your profile ')
-            return redirect('accounts:edit_profile_url')
-    else:
-        user_form = UserForm(instance=request.user)
-        profile = UserProfileForm(instance=userprofile)
-    context = {
-        'user_form': user_form,
-        'profile': profile
-    }
-    return render(request, 'accounts/profile.html', context)
-
-
-@login_required(login_url='accounts:sign_in')
-def change_password(request):
-    if request.method == 'POST':
-        current_password = request.POST['current_password']
-        new_password = request.POST['new_password']
-        confirm_password = request.POST['confirm_password']
-
-        user = Account.objects.get(username__exact=request.user.username)
-        if new_password == confirm_password:
-            success = user.check_password(current_password)
-            if success:
-                user.set_password(new_password)
-                user.save()
-                messages.success(request, 'password updated successfully')
-                return redirect('accounts:changepassword_url')
-            else:
-                messages.error(request, "Please enter the valid currrent password")
-                return redirect('accounts:changepassword_url')
-
-        else:
-            messages.error(request, 'Passwords doesnt match')
-            return redirect('accounts:changepassword_url')
-
-    return render(request, 'accounts/changepassword.html')
+#
+# # using instance to get the user of the profile
+# @login_required(login_url='accounts:sign_in')
+# def edit_pro(request):
+#     userprofile = get_object_or_404(UserProfile, user=request.user)
+#     if request.method == 'POST':
+#         user_form = UserForm(request.POST, instance=request.user)
+#         profile = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+#         if user_form.is_valid() & profile.is_valid():
+#             user_form.save()
+#             profile.save()
+#             messages.success(request, 'Your just updated your profile ')
+#             return redirect('accounts:edit_profile_url')
+#     else:
+#         user_form = UserForm(instance=request.user)
+#         profile = UserProfileForm(instance=userprofile)
+#     context = {
+#         'user_form': user_form,
+#         'profile': profile
+#     }
+#     return render(request, 'accounts/profile.html', context)
+#
+#
+# @login_required(login_url='accounts:sign_in')
+# def change_password(request):
+#     if request.method == 'POST':
+#         current_password = request.POST['current_password']
+#         new_password = request.POST['new_password']
+#         confirm_password = request.POST['confirm_password']
+#
+#         user = Account.objects.get(username__exact=request.user.username)
+#         if new_password == confirm_password:
+#             success = user.check_password(current_password)
+#             if success:
+#                 user.set_password(new_password)
+#                 user.save()
+#                 messages.success(request, 'password updated successfully')
+#                 return redirect('accounts:changepassword_url')
+#             else:
+#                 messages.error(request, "Please enter the valid currrent password")
+#                 return redirect('accounts:changepassword_url')
+#
+#         else:
+#             messages.error(request, 'Passwords doesnt match')
+#             return redirect('accounts:changepassword_url')
+#
+#     return render(request, 'accounts/changepassword.html')
