@@ -2888,9 +2888,14 @@ fieldset:disabled a.btn {
 .btn-info {
   color: #fff;
   background-color: #17a2b8;
+  /* background-color: #720830; */
   border-color: #17a2b8;
   box-shadow: none;
 }
+
+/* .add-member {
+  background-color: #720830 !important;
+} */
 
 .btn-info:hover {
   color: #fff;
@@ -52415,4 +52420,11 @@ a.text-muted:hover {
 .dark-mode .dark-mode.accent-gray-dark .page-item .page-link:hover, .dark-mode .dark-mode.accent-gray-dark .page-item .page-link:focus {
   color: #3f474e;
 }
+
+
+/*** ***/
+.add-mem {
+  background-color: #720830 !important;
+}
+
 /*# sourceMappingURL=adminlte.css.map */

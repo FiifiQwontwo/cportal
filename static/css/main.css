@@ -514,6 +514,8 @@ iframe {
     padding-right: 60px;
   }
 
+}
+
 @media (max-width: 576px) {
   .wrap-login100 {
     padding-left: 15px;
@@ -525,3 +527,5 @@ iframe {
     width: 100%;
   }
 }
+
+
