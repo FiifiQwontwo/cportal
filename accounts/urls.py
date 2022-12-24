@@ -14,6 +14,5 @@ urlpatterns = [
     path('resetpassword/', resetpassword, name='resetpassword_url'),
     path('resetpasswordv/<uidb64>/<token>/', resetpasswordValiate, name='reset_password_validate_url'),
 
-    # path('forgot/', forgotpassword, name='password_reset_url'),
-    # path('reset/<uidb64>/<token>/', reset_password_validate, name='validate_password_url'),
+
 ]
