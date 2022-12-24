@@ -12,6 +12,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
+
 # Create your views here.
 @login_required(login_url = 'accounts:login_url')
 def register(request):
@@ -67,12 +68,14 @@ def login(request):
     return render(request, 'accounts/login.html')
 
 
+@login_required(login_url = 'accounts:login_url')
 def logout(request):
     auth.logout(request)
     messages.success(request, "You're logged out")
     return redirect('accounts:login_url')
 
 
+@login_required(login_url = 'accounts:login_url')
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -90,16 +93,21 @@ def activate(request, uidb64, token):
     # return HttpResponse('ok')
 
 
-def forgotpassword(request):
-    if request.method =='POST':
+
+
+
+
+def forgetpassword(request):
+    if request.method == 'POST':
         email = request.POST['email']
         if Account.objects.filter(email=email).exists():
             user = Account.objects.get(email__exact=email)
+
             current_site = get_current_site(request)
-            mail_subject = "Reset Password"
-            message = render_to_string('accounts/resetpassword.html', {
+            mail_subject = "Accounts Reset"
+            message = render_to_string('accounts/reset_verification.html', {
                 'user': user,
-                'domian': current_site,
+                'domain': current_site,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': default_token_generator.make_token(user),
             })
@@ -108,14 +116,96 @@ def forgotpassword(request):
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
 
-            messages.success(request, 'Reset token be sent to your mail')
-            return redirect('accounts:login_url')
+            messages.success(request, "password reset email has been sent to your mail")
+            return redirect('accounts:sign_in')
 
         else:
-            messages.error(request, 'Accounts dont Exist')
-            return redirect('accounts:password_reset_url')
-    return render(request, 'accounts/forgotpassword.html')
+            messages.error(request, 'Accounts Doesnot Exist')
+            return redirect('accounts:forgotpassword_url')
+
+    return render(request, 'accounts/forgetpasswords.html')
 
 
-def reset_password_validate(request):
-    return HttpResponse('ok')
+# @login_required(login_url='accounts:sign_in')
+def resetpasswordValiate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = Account._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, Account.DoesnotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        request.session['uid'] = uid
+        messages.success(request, 'Please Reset Your Password')
+        return redirect('accounts:resetpassword_url')
+
+    else:
+        messages.error(request, 'This link is expired')
+        return redirect('accounts:sign_in')
+
+
+def resetpassword(request):
+    if request.method == 'POST':
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+
+        if password == confirm_password:
+            uid = request.session.get('uid')
+            user = Account.objects.get(pk=uid)
+            user.set_password(password)
+            user.save()
+            messages.success(request, 'Password Reset Was Successful')
+            return redirect('accounts:sign_in')
+        else:
+            messages.error(request, "passwords dont match")
+            return redirect('accounts:resetpassword_url')
+    else:
+        return render(request, 'accounts/passreset.html')
+
+
+# using instance to get the user of the profile
+@login_required(login_url='accounts:sign_in')
+def edit_pro(request):
+    userprofile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if user_form.is_valid() & profile.is_valid():
+            user_form.save()
+            profile.save()
+            messages.success(request, 'Your just updated your profile ')
+            return redirect('accounts:edit_profile_url')
+    else:
+        user_form = UserForm(instance=request.user)
+        profile = UserProfileForm(instance=userprofile)
+    context = {
+        'user_form': user_form,
+        'profile': profile
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+@login_required(login_url='accounts:sign_in')
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(username__exact=request.user.username)
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'password updated successfully')
+                return redirect('accounts:changepassword_url')
+            else:
+                messages.error(request, "Please enter the valid currrent password")
+                return redirect('accounts:changepassword_url')
+
+        else:
+            messages.error(request, 'Passwords doesnt match')
+            return redirect('accounts:changepassword_url')
+
+    return render(request, 'accounts/changepassword.html')
