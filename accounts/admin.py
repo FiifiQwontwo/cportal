@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.admin import UserAdmin
 from portal.models import *
-from .models import Account
+from .models import Account, UserProfile
+from django.utils.html import format_html
 
 # Register your models here.
 admin.site.site_header = "CTAC PastCare admin"
@@ -77,3 +78,12 @@ class AttendanceSummariesAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    # using a function to return the user profile pic on the admin section
+    def thumbnails(self, object):
+        return format_html('<img src="{}" width="30" style="border_radius:50%;">'.format(object.profile_pic.url))
+
+    thumbnails.short_description = 'Profile_pic'
+    list_display = ('thumbnails', 'user')
