@@ -6,12 +6,12 @@
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
+                <div class="row mb-2 row-heading">
                     <div class="col-sm-6">
-                        <h1>PC Members</h1>
+                        <h1 class="pc-heading">PC Members</h1>
                     </div>
                     <a href="{% url 'portal:add_member_url' %}"
-                                           class="btn btn-sm btn-info float-left">Add Member</a>
+                                           class="btn btn-sm btn-info float-left btn-add-mem">Add Member</a>
 
                 </div>
 
@@ -26,7 +26,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
-                                        <thead>
+                                        <thead class="table-tr-color">
                                         <tr>
                                             <th>ID</th>
                                             <th>FIRST NAME</th>
@@ -54,7 +54,7 @@
                                     </table>
                                     <div class="card-footer clearfix">
                                         <a href="{% url 'portal:add_member_url' %}"
-                                           class="btn btn-sm btn-info float-left">Add Member</a>
+                                           class="btn btn-sm btn-info btn-add-mem float-left">Add Member</a>
                                     </div>
                                 </div>
                             </div>
