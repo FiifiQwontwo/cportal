@@ -4,7 +4,7 @@ from django.core.cache import cache
 from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm, CreatePcUserForm
 import json
 from django.contrib.auth.decorators import login_required
-from .filters import Memberfilter
+from .filters import Memberfilter, AttendanceFilter
 
 
 @login_required(login_url='accounts:login_url')
@@ -180,10 +180,14 @@ def create_chapel(request):
 # when we go to prod remember to change the date on attendance summary (service date)
 def list_view_attendance(request):
     read = Attendances.objects.all().order_by('service_date').select_related('member')
+    rea =Attendances.objects.all()
+    newFilter = AttendanceFilter(request.GET, queryset=rea)
+    rea = newFilter.qs
     context = {
-        'read': read
-
+        'read': read,
+        'newFilter': newFilter,
     }
+    print(context)
     return render(request, 'attendance/list.html', context)
 
 
@@ -220,11 +224,5 @@ def create_pcheads(request):
     context['dbuser_create'] = dbuser_create
     return render(request, "DBUSer/create.html", context)
 
-
 # def create_absent_chapel(request):
 #     chaps = Chapels.get.objects.filter()
-
-
-
-
-
