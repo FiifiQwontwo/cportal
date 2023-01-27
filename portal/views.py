@@ -4,6 +4,7 @@ from django.core.cache import cache
 from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm, CreatePcUserForm
 import json
 from django.contrib.auth.decorators import login_required
+from .filters import Memberfilter
 
 
 @login_required(login_url='accounts:login_url')
@@ -40,11 +41,12 @@ def memberindex(request):
 @login_required(login_url='accounts:login_url')
 def list_view_member(request):
     memlist = Members.objects.all().select_related('chapel', 'group')
-    # groud = DBUser.objects.filter(group__id=Members.group)
+    myFilter = Memberfilter(request.GET, queryset=memlist)
+    memlist = myFilter.qs
 
     context = {
-        'memlist': memlist
-        # 'groud': groud,
+        'memlist': memlist,
+        'myFilter': myFilter,
     }
     return render(request, 'member/list.html', context)
 
@@ -221,6 +223,8 @@ def create_pcheads(request):
 
 # def create_absent_chapel(request):
 #     chaps = Chapels.get.objects.filter()
+
+
 
 
 
