@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ section.title }}{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'dist/img/ctaclogo.png' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
-     <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/dropzone/min/dropzone.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
@@ -20,12 +22,13 @@
     <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static '/customCSS/styles.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.0/dist/chart.umd.min.js"></script>
 </head>
 
 <style>
-  a:hover {
-    background-color: transparent;
-}
+    a:hover {
+        background-color: transparent;
+    }
 </style>
 <body class="hold-transition sidebar-mini layout-fixed  layout-navbar-fixed  layout-footer-fixed">
 <div class="wrapper">
@@ -39,7 +42,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{% url 'portal:home_page' %}" class="nav-link hori-nav-link">Home</a>
                 </li>
-                 <li class="nav-item d-none d-sm-inline-block">
+                <li class="nav-item d-none d-sm-inline-block">
 
                 </li>
             </ul>
@@ -74,77 +77,77 @@
                 <span class="brand-text font-weight-light">{{ request.user.first_name }}&nbsp;{{ request.user.last_name }}</span>
             </a>`
             <div class="sidebar">
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <li class="nav-item">
-                        <a href="{% url 'portal:list_member_url' %}" class="nav-link">
-                           <i class="fas fa-users"></i> &nbsp;
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="{% url 'portal:list_member_url' %}" class="nav-link">
+                                <i class="fas fa-users"></i> &nbsp;
 
-                            <p>
-                                Members
+                                <p>
+                                    Members
 
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'portal:list_group_url' %}" class="nav-link">
-                            <i class="ion ion-stats-bars"></i> &nbsp;
-                            <p>
-                                PC Groups
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'portal:list_grouplead_url' %}" class="nav-link">
-                            <i class="ion ion-person"></i> &nbsp;
-                            <p>
-                                Group Heads
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'portal:list_chapel_url' %}" class="nav-link">
-                             <i class="far fa-building"></i> &nbsp;
-                            <p>
-                                Chapel
-                            </p>
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                        <a href="{% url 'portal:list_attendance_url' %}" class="nav-link">
-                            <i class="far fa-file-alt mr-1"></i> &nbsp;
-                            <p>
-                                Attendances
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'portal:list_summary_attendance_url' %}" class="nav-link">
-                            <i class="nav-icon fas fa-edit"></i> &nbsp;
-                            <p>
-                                Attendances Summary
-                            </p>
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                        <a href="{% url 'accounts:sign_out_url' %}" class="nav-link">
-                            <i class="fas fa-door-closed"></i> &nbsp;
-                            <p>
-                                Logout
-                            </p>
-                        </a>
-                    </li>
-                     <li class="nav-item">
-                        <a href="{% url 'accounts:signup_url' %}" class="nav-link">
-                            <i class="fas fa-user-plus"></i>&nbsp;
-                            <p>
-                                New User
-                            </p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'portal:list_group_url' %}" class="nav-link">
+                                <i class="ion ion-stats-bars"></i> &nbsp;
+                                <p>
+                                    PC Groups
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'portal:list_grouplead_url' %}" class="nav-link">
+                                <i class="ion ion-person"></i> &nbsp;
+                                <p>
+                                    Group Heads
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'portal:list_chapel_url' %}" class="nav-link">
+                                <i class="far fa-building"></i> &nbsp;
+                                <p>
+                                    Chapel
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'portal:list_attendance_url' %}" class="nav-link">
+                                <i class="far fa-file-alt mr-1"></i> &nbsp;
+                                <p>
+                                    Attendances
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'portal:list_summary_attendance_url' %}" class="nav-link">
+                                <i class="nav-icon fas fa-edit"></i> &nbsp;
+                                <p>
+                                    Attendances Summary
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'accounts:sign_out_url' %}" class="nav-link">
+                                <i class="fas fa-door-closed"></i> &nbsp;
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'accounts:signup_url' %}" class="nav-link">
+                                <i class="fas fa-user-plus"></i>&nbsp;
+                                <p>
+                                    New User
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </aside>
     </div>
@@ -152,15 +155,15 @@
     {% block content %}
 
     {% endblock %}
-    <div id ="modal" class="modal fade" tabindex="-1">
+    <div id="modal" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
         </div>
     </div>
 
-    <footer class="main-footer" >
+    <footer class="main-footer">
         <b>PastCare</b> &nbsp;
         <a href="https://github.com/FiifiQwontwo" target="_blank">Powered By Fortem
-            </a>
+        </a>
         <div class="float-right d-none d-sm-inline-block">
             <strong>Copyright &copy; 2014-{% now 'Y' %} .</strong>
         </div>
@@ -196,8 +199,8 @@
 <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
 {#<script src="https://unpkg.com/htmx.org@1.7.0"></script>#}
- <script src="https://unpkg.com/htmx.org@1.6.1"></script>
-<script src = "{% static 'dialog.js' %}" ></script>
+<script src="https://unpkg.com/htmx.org@1.6.1"></script>
+<script src="{% static 'dialog.js' %}"></script>
 <script>
     $(function () {
         $("#example1").DataTable({
@@ -215,7 +218,7 @@
         });
     });
 
-    function launchModal(){
+    function launchModal() {
         $('#modal-default').modal()
     }
 </script>

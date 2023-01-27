@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from portal.models import AttendanceSummaries, Attendances, Members, Groups, Chapels, DBUser
 from django.core.cache import cache
-from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm,CreatePcUserForm
+from .forms import CreateGroupForm, CreateChapelForm, CreateMemberForm, CreatePcUserForm
 import json
 from django.contrib.auth.decorators import login_required
+
 
 @login_required(login_url='accounts:login_url')
 def index_page(request):
@@ -93,7 +94,6 @@ def create_view_group(request):
 
     context['groupcreate'] = groupcreate
     return render(request, "groups/create.html", context)
-
 
 
 @login_required(login_url='accounts:login_url')
@@ -217,4 +217,10 @@ def create_pcheads(request):
 
     context['dbuser_create'] = dbuser_create
     return render(request, "DBUSer/create.html", context)
+
+
+# def create_absent_chapel(request):
+#     chaps = Chapels.get.objects.filter()
+
+
 
