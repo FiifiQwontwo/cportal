@@ -179,15 +179,15 @@ def create_chapel(request):
 @login_required(login_url='accounts:login_url')
 # when we go to prod remember to change the date on attendance summary (service date)
 def list_view_attendance(request):
-    read = Attendances.objects.all().order_by('service_date').select_related('member')
-    rea =Attendances.objects.all()
+    read = Attendances.objects.all().order_by('service_date').select_related('member').filter(is_present=1)
+    rea = Attendances.objects.all()
     newFilter = AttendanceFilter(request.GET, queryset=rea)
     rea = newFilter.qs
     context = {
         'read': read,
         'newFilter': newFilter,
     }
-    print(context)
+    # print(context)
     return render(request, 'attendance/list.html', context)
 
 
@@ -224,5 +224,13 @@ def create_pcheads(request):
     context['dbuser_create'] = dbuser_create
     return render(request, "DBUSer/create.html", context)
 
-# def create_absent_chapel(request):
-#     chaps = Chapels.get.objects.filter()
+
+def list_atbsentee(request):
+    ad = Attendances.objects.all().order_by('service_date').select_related('member').filter(is_present=0)
+
+    context = {
+        'ad': ad,
+
+    }
+    # print(context)
+    return render(request, 'attendance/absent.html', context)

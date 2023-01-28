@@ -21,4 +21,4 @@ class AttendanceFilter(django_filters.FilterSet):
 
     class Meta:
         model = Attendances
-        fields = ('member','reason')
+        fields = ()

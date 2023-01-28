@@ -1,20 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}CTAC | Attendances {% endblock %}
+{% block title %}CTAC | Absent {% endblock %}
 {% block content %}
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Present</h1>
+                        <h1>Absent</h1>
 
                     </div>
                 </div>
-                <form method="get">
-{{ newFilter.form }}
-                        <button type="submit" class="btn btn-sm btn-info float-right btn-add-mem-"> Filter</button>
-                    </form>
+
             </div>
         </section>
         <section class="content">
@@ -34,19 +31,19 @@
                                              <th> Group Name </th>
                                              <th> Chapel</th>
                                              <th>Service Date</th>
-                                             <th>Present</th>
+                                             <th>Absent</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {%  for read in read %}
+                                        {%  for ad in ad %}
                                         <tr>
-                                            <td>{{ read.member.first_name  }}</td>
-                                            <td>{{ read.member.last_name }}</td>
-                                            <td>{{ read.member.phone_number }}</td>
-                                            <td>{{ read.member.group }}</td>
-                                            <td>{{ read.member.chapel.name }}</td>
-                                            <td>{{read.service_date |date:"M d, Y" }}</td>
-                                           <td>{{ read.is_present }}</td>
+                                            <td>{{ ad.member.first_name  }}</td>
+                                            <td>{{ ad.member.last_name }}</td>
+                                            <td>{{ ad.member.phone_number }}</td>
+                                            <td>{{ ad.member.group }}</td>
+                                            <td>{{ ad.member.chapel.name }}</td>
+                                            <td>{{ad.service_date |date:"M d, Y" }}</td>
+                                           <td>{{ ad.is_present }}</td>
                                         </tr>
                                         {% endfor %}
 

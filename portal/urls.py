@@ -23,5 +23,6 @@ urlpatterns = [
     # path('groups/<int:pk>/delete', dbuser_delete, name='delete_group_head'),
     path('add_member/', create_members, name='add_member_url'),
     path('add_dbuser/', create_pcheads, name='add_dbuser_url'),
+    path('abs/', list_atbsentee, name='absent_url'),
 
 ]
