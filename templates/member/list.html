@@ -34,8 +34,7 @@
                                         <thead class="table-tr-color">
                                         <tr>
                                             <th>ID</th>
-                                            <th>FIRST NAME</th>
-                                            <th>LAST NAME</th>
+                                            <th> NAME</th>
                                             <th>PHONE NUMBER</th>
                                             <th> CHAPEL NAME</th>
                                             <th> PC GROUP</th>
@@ -45,9 +44,8 @@
                                         {% for memlist in memlist %}
                                             <tr>
                                                 <td>{{ memlist.id }}</td>
-                                                <td>{{ memlist.first_name|capfirst }}</td>
                                                  <td><a href="{% url 'portal:details_member_urls' memlist.id %}"
-                                                   class="link-black">{{ memlist.last_name|capfirst }}</a></td>
+                                                   class="link-black">{{ memlist.first_name|capfirst }}&nbsp;{{ memlist.last_name|capfirst }}</a></td>
 {#                                               <td> <a>< href="{% url 'portal:details_member_urls' memlist.id%}{{ memlist.last_name }}</a></td>#}
                                                 <td>{{ memlist.phone_number }}</td>
                                                 <td>{{ memlist.chapel|capfirst }}</td>
