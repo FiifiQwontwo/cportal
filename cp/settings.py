@@ -83,9 +83,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
-        'PASSWORD': '',
+        'PASSWORD': 'ourCare@2022',
         'HOST': config('DB_HOST'),
-        'PORT': '3306',
+        'PORT': '3309',
         'OPTIONS': {
             'sql_mode': 'traditional',
             # Added this line to coreect the django.utils.IngerityError on  update of a user or a field
