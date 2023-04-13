@@ -8,6 +8,13 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Absent</h1>
+                       From : <input type = "date" name="startdate"/>
+                        To: <input type = "date" name="todate "/>
+                        <input type ="submit"  value="Search"/>
+                        <hr/>
+
+
+
 
                     </div>
                 </div>
@@ -32,6 +39,8 @@
                                              <th> Chapel</th>
                                              <th>Service Date</th>
                                              <th>Absent</th>
+                                            <th>reason</th>
+                                            <th>Marked at</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -44,6 +53,8 @@
                                             <td>{{ ad.member.chapel.name }}</td>
                                             <td>{{ad.service_date |date:"M d, Y" }}</td>
                                            <td>{{ ad.is_present }}</td>
+                                           <td>{{ ad.reason }}</td>
+                                               <td>{{ ad.created_at}}</td>
                                         </tr>
                                         {% endfor %}
 
