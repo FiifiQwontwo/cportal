@@ -231,14 +231,17 @@ def list_atbsentee(request):
     if request.method == 'POST':
         startdate = request.POST.get('startdate')
         todate = request.POST.get('todate')
-        searchresults=Attendances.objects.raw('SELECT members.first_name AS Firstname,members.last_name AS last name,'
-                                              'members.phone_number AS phone number,chapels.name AS chapel,attendances.is_present,attendances.reason AS Reason,'
-                                              'attendances.service_date AS sunday_service_date, attendances.created_at AS Date Marked '
-                                              'FROMattendances JOIN members ON ourpastcares.members.id = '
-                                              'ourpastcares.attendances.member_id JOIN chapels ON '
-                                              'ourpastcares.chapels.id = ourpastcares.members.chapel_id'
-                                              'where attendances.is_present = 0  ')
-    ad = Attendances.objects.all().order_by('service_date').select_related('member').filter(is_present=0)
+        searchresults = Attendances.objects.raw('SELECT members.first_name AS Firstname,members.last_name AS last name,'
+                                                'members.phone_number AS phone number,chapels.name AS chapel,'
+                                                'is_present,reason AS Reason,'
+                                                'service_date, created_at AS Date Marked '
+                                                'FROMattendances JOIN members ON members.id = '
+                                                'attendances.member_id JOIN chapels ON '
+                                                'chapels.id = members.chapel_id'
+                                                'where Attendances.is_present = 0 and where service_date between " ' + startdate + '" and "' + todate + '"')
+        return render(request,'attendance/absent.html', {'searchresults':searchresults})
+    else:
+        ad = Attendances.objects.all().order_by('service_date').select_related('member').filter(is_present=0)
 
     context = {
         'ad': ad,
