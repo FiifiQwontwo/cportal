@@ -1,6 +1,6 @@
 {% autoescape off %}
 Hi {{ user.last_name }},
     Please confirm your registration.
-    http://{{ domain }}{% url  'accounts:activate' uidb64=uid token=token %}
+    http:///{{ domian }}{% url  'accounts:activate' uidb64=uid token=token %}
 {% endautoescape %}
 

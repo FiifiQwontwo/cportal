@@ -8,6 +8,10 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Absent</h1>
+                        <form method="POST">
+                            {% csrf_token %}
+
+
                        From : <input type = "date" name="startdate"/>
                         To: <input type = "date" name="todate "/>
                         <input type ="submit"  value="Search"/>
